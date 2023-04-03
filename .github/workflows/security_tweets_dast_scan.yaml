@@ -29,7 +29,7 @@ jobs:
     - uses: actions/checkout@v3
     # Scan
     - name: Checkmarx DAST Github Action
-      uses: Checkmarx/dast-github-action@v1.0.1-beta
+      uses: Checkmarx/dast-github-action@v1.0.2
       env:
         CX_APIKEY: ${{ secrets.CX_ONE_API_KEY_EU_PROD }}
       with:
@@ -40,14 +40,3 @@ jobs:
         fail_on: "HIGH"
         verbose: true
         log_level: debug
-        output: ./output
-    - name: Reclaim output directory  
-      if: always()  
-      run: sudo chown -R 1001:1001 ${{ github.workspace }}/output
-    - uses: actions/upload-artifact@v3
-      if: always()
-      name: Upload Logs
-      with:
-        name: report
-        path: ./output
-        
