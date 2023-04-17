@@ -1,13 +1,13 @@
-name: allengayCx Gin Juice
+name: CxDast Gin Juice 
 
 # Controls when the workflow will run
 on:
-  #pull_request:
-  #  types: [opened, reopened, synchronize]
-  #  branches: [ "main" ]
-  #push: 
-  #    branches:
-  #    - main
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [ "main" ]
+  push: 
+      branches:
+      - main
   workflow_dispatch: # *** this adds a run button ***
 
 permissions:
@@ -31,13 +31,13 @@ jobs:
     - name: Checkmarx DAST Github Action
       uses: Checkmarx/dast-github-action@v1.0.2
       env:
-        CX_APIKEY: ${{ secrets.CX_APIKEY }}
+        CX_APIKEY: ${{ secrets.CX_ONE_API_KEY_EU_PROD }}
       with:
         command: "web"
         config: './gin_juice.yaml'
         # openapi: file here
-        base_url: "https://ast.checkmarx.net" #"https://deu.ast.checkmarx.net"
-        environment_id: "e64ac486-f2e3-486e-8757-fece216af179" #"2f776f4a-dfda-46d1-9fda-b879307d9b76"
+        base_url: "https://eu.ast.checkmarx.net" 
+        environment_id: "c1b94d43-ff6c-4638-b70f-051a6cc3ab85" 
         fail_on: "HIGH"
         verbose: true
         output: ./output
